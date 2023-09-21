@@ -6,6 +6,7 @@ use colored::Colorize;
 use std::fmt::{Debug, Display};
 use std::process::exit;
 
+/// Manage a local version file that follows a variation of the Semantic Version spec.
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
 #[command(propagate_version = true)]

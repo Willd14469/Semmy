@@ -1,4 +1,4 @@
-# semantic-version-helper
+# Semmy
 A small utility to automatically alter a semantic version in a local file to be used however you see fit. Useful when you do not want to depend solely on a CI/CD pipeline tool but want to automatically track builds.
 
 # Usage
@@ -6,6 +6,7 @@ A small utility to automatically alter a semantic version in a local file to be 
 ```bash
 $ semmy
 ```
+
 ```
 Manage a local version file that follows a variation of the Semantic Version spec
 
