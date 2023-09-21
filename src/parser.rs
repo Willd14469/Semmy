@@ -1,5 +1,5 @@
-use crate::semantic_version::{SemanticVersion, SemanticVersionBuilder, ALPHA_IDENTIFIER};
-use regex::{Match, Regex};
+use crate::semantic_version::{SemanticVersion, SemanticVersionBuilder};
+use regex::Regex;
 use std::error::Error;
 use std::fmt::{Debug, Display, Formatter};
 
