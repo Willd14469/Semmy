@@ -20,6 +20,10 @@ pub struct Cli {
     /// Allow coloured output
     #[arg(short, long, default_value("false"))]
     coloured: bool,
+
+    /// Output docker safe version
+    #[arg(short, long, default_value("false"))]
+    docker: bool,
 }
 
 type ExitCode = u8;
@@ -45,6 +49,10 @@ impl Cli {
 
         if self.coloured {
             set_bool("COLOURED", true)
+        }
+
+        if self.docker {
+            set_bool("DOCKER", true)
         }
 
         let mut semvar_result = FileInterface::load_and_parse();

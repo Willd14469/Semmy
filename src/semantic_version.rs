@@ -1,6 +1,6 @@
 use crate::env::get_bool_with_default;
 use crate::semantic_version::sem_ver_traits::{
-    ColouredTextRenderer, SemVerVisualizer, TextRenderer,
+    ColouredTextRenderer, DockerRenderer, SemVerVisualizer, TextRenderer,
 };
 use colored::Colorize;
 use std::fmt::{Display, Formatter};
@@ -52,6 +52,10 @@ pub struct SemanticVersion {
 
 impl ToString for SemanticVersion {
     fn to_string(&self) -> String {
+        if get_bool_with_default("DOCKER", false) {
+            return DockerRenderer::construct_str(self);
+        }
+
         TextRenderer::construct_str(self)
     }
 }
@@ -185,7 +189,7 @@ mod sem_ver_traits {
             let pre_release_string =
                 Self::edit_pre_release_hook(Self::construct_pre_release_str(sem_ver));
 
-            let build_str = Self::edit_pre_release_hook(Self::construct_build_str(sem_ver));
+            let build_str = Self::edit_build_hook(Self::construct_build_str(sem_ver));
 
             let version = Self::edit_pre_release_hook(Self::construct_version_str(sem_ver));
 
@@ -257,6 +261,16 @@ mod sem_ver_traits {
 
         fn edit_version_hook(version: String) -> String {
             version.magenta().to_string()
+        }
+    }
+
+    pub struct DockerRenderer;
+
+    impl SemVerPrivateVisInterface for DockerRenderer {}
+
+    impl SemVerVisualizer for DockerRenderer {
+        fn edit_build_hook(build: String) -> String {
+            build.replace('+', "--")
         }
     }
 }

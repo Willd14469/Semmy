@@ -22,7 +22,7 @@ impl Error for ParseError {}
 /// https://regexper.com/#%5E%28%5Cd%29%2B%5C.%28%5Cd%29%2B%5C.%28%5Cd%29%2B%28%3F%3A-%28%5Cw%29%3F%28%5C.%28%5Cw%29%29*%29%28%3F%3A%5C%2B%28%5Cd%29%2B%29%3F%24
 pub fn parse(input: &str) -> anyhow::Result<SemanticVersion> {
     let re =
-        Regex::new(r"^(?P<major>[[:digit:]])+\.(?P<minor>[[:digit:]])+\.(?P<patch>[[:digit:]])+(?:-(?P<pre_release>alpha|beta))?(?:\+(?P<build>[[:digit:]]+))?$")
+        Regex::new(r"^(?P<major>[[:digit:]])+\.(?P<minor>[[:digit:]])+\.(?P<patch>[[:digit:]])+(?:-(?P<pre_release>alpha|beta))?(?:(\+|--)(?P<build>[[:digit:]]+))?$")
             .unwrap();
 
     let matches = re
